@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+    <section class="monForm col-md-4 container mt-5 pt-3">
+        <div>
+            <h1 class="text-center">Identifiez-vous</h1>
+        </div>
+        <div class="container my-5 row">
+            <div class="col-md-5 widthPictureLog"><img src="assets/logos/blanc_logo_small_icon_only_W&B.png" class="img-fluid" alt=""></div>
+
+                <form class="col-md-7" method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Votre email...">
+                    <label for="inputPassword" class="pt-3">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Votre mot de passe...">
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="btn btn-lg btn-success mt-4" type="submit">Se connecter</button>
+                </form>
+
+        </div>
+    </section>
+
+
+{% endblock %}
