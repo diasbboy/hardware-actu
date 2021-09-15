@@ -29,6 +29,11 @@ class Categorie
      */
     private $articles;
 
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();

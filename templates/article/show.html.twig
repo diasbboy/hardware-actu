@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.titre }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ article.contenu }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ article.source }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td>{{ article.lien }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    <img src="{{ asset(article.image) }}" alt="">
+                </td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary mb-2">Modifier</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+    <a href="{{ path('article_index') }}" class="btn btn-primary mt-2">Revenir à la liste des articles</a>
+</div>
+{% endblock %}

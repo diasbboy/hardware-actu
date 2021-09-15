@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
+use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -65,6 +68,17 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if(empty($this->createdAt))
+        {
+            $this->createdAt = new DateTime();
+        }
+    }
 
     public function __construct()
     {

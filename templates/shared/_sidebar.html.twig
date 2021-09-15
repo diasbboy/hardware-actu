@@ -1,0 +1,93 @@
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <a href="{{ path('home') }}"><img src="{{ asset('asset/logos/blanc_logo_small_icon_only_W&B.png') }}" class="imageSide" alt="mon logo"></a>
+    </div>
+
+    <ul class="list-unstyled components mt-5">
+        <li class="active">
+            <a href="{{ path('home') }}">Accueil</a>
+        </li>
+        <li>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                class="dropdown-toggle">Actualités</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Processeurs</a>
+                </li>
+                <li>
+                    <a href="#">Cartes mères</a>
+                </li>
+                <li>
+                    <a href="#">Cartes Graphiques</a>
+                </li>
+                <li>
+                    <a href="#">Disques dur</a>
+                </li>
+                <li>
+                    <a href="#">Ram</a>
+                </li>
+                <li>
+                    <a href="#">Alimentation</a>
+                </li>
+                <li>
+                    <a href="#">Boitier</a>
+                </li>
+                <li>
+                    <a href="#">Refroidissement</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">tutoriels</a>
+        </li>
+        <li>
+            <a href="#">Forum</a>
+        </li>
+    </ul>
+
+    
+        
+        
+            <ul class="list-unstyled components">
+
+                <li>
+                <a href="#adminMenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">Administration</a>
+                <ul class="collapse list-unstyled" id="adminMenu">
+                    <li>
+                        <a href="{{ path('article_index') }}">Gérer les articles</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('categorie_index') }}">Gérer les catégories</a>
+                    </li>
+                </ul>
+
+            </ul>
+        
+         
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">Compte</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+
+        {% if app.user %} 
+                    <li>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+        {% else %}
+            
+   
+
+                <li>
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                </li>
+                <li>
+                    <a href="{{ path('app_register') }}">S'inscrire</a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+    {% endif %}
+</nav>

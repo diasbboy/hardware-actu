@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block body %}
+    
+    <div class="container formArticle my-5 py-5">
+            <h1 class="pb-3 text-center">Ajouter un nouvel article</h1>
+            <div class="col-md-12">
+
+                {{ include('article/_form.html.twig') }}
+
+                <a href="{{ path('article_index') }}" class="btn btn-primary mt-2">Revenir à la liste des articles</a>
+            
+            </div>    
+    </div>
+    
+{% endblock %}

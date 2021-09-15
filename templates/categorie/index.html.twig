@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+
+
+    <div class="container py-5">
+    
+        <h1>Categories</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for categorie in categories %}
+                <tr>
+                    <td>{{ categorie.id }}</td>
+                    <td>{{ categorie.nom }}</td>
+                    <td>
+                        <a href="{{ path('categorie_show', {'id': categorie.id}) }}" class="btn btn-success mx-auto">afficher</a>
+                        <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="btn btn-warning ml-3">modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('categorie_new') }}" class="btn btn-primary">Ajouter une nouvelle catégorie</a>
+    </div>
+{% endblock %}

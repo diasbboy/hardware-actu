@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+
+    <div class="py-5">
+        <div class="container">
+        
+        <h1>Liste des articles</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Contenu</th>
+                    <th>Source</th>
+                    <th>Lien</th>
+                    <th>Image</th>
+                    <th>CreatedAt</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.titre }}</td>
+                    <td>{{ article.contenu }}</td>
+                    <td>{{ article.source }}</td>
+                    <td>{{ article.lien }}</td>
+                    <td>
+                        <img src="{{ asset(article.image) }}" alt="">
+                    </td>
+                    <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-success">Afficher</a>
+                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('article_new') }}" class="btn btn-primary">Ajouter un nouvel article</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+/*******************************************************************************************
+                            formulaire de contact 
+*******************************************************************************************/
+.formContact{
+    border: 2px solid transparent;
+    border-radius: 15px;
+    background: linear-gradient(to bottom right, #3168c6, white);
+    /* background-color: #3168c6 ; */
+    color: white;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+.widthButton{
+    width: 9rem;
+    border-radius: 20px;
+}
+
+.widthPicture{
+   padding-top: 50px;
+   padding-left: 10%;
+   
+}
+
+/*********************************************************************************
+                    Formulaire de connexion
+*********************************************************************************/
+.widthPictureLog{
+    padding-top: 12px;
+}
+.formLogin{
+    border: 2px solid transparent;
+    background: linear-gradient(to bottom right, #3168c6, white);
+    color: white;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+
+/***********************************************************************************
+                Formulaire d'ajout d'article
+***********************************************************************************/
+.formArticle{
+    border: 2px solid transparent;
+    background: linear-gradient(to bottom right, #3168c6, white);
+    color: white;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 30px;
+}
+
+
+/*********************************************************************************
+                    Liste des articles
+*********************************************************************************/
+
+.tailleImageListe{
+    height: 100px;
+    object-fit: contain;
+}

@@ -58,6 +58,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $articles;
 
+    public function __toString()
+    {
+        return $this->getPseudo();
+    }
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();

@@ -3,10 +3,10 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-            <section class="monForm col-md-4 container mt-5 pt-3">
+            <section class="formLogin container my-5 pt-3">
                 <h1 class="text-center">Créer un compte</h1>
                 <div class="container col-md-12 my-5 row">
-                    <div class="col-md-5 widthPicture"><img src="assets/logos/blanc_logo_small_icon_only_W&B.png" class="img-fluid" alt=""></div>
+                    <div class="col-md-5 widthPicture"><img src="{{ asset('asset/logos/blanc_logo_small_icon_only_W&B.png') }}" class="img-fluid" alt=""></div>
                      <div class="col-md-7" method="POST">
 
                         {{ form_start(registrationForm) }}
