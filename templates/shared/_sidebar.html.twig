@@ -46,23 +46,30 @@
     </ul>
 
     
-        
-        
-            <ul class="list-unstyled components">
 
-                <li>
-                <a href="#adminMenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle">Administration</a>
-                <ul class="collapse list-unstyled" id="adminMenu">
+    
+        {% if app.user %}
+            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+            
+                <ul class="list-unstyled components">
+
                     <li>
-                        <a href="{{ path('article_index') }}">Gérer les articles</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('categorie_index') }}">Gérer les catégories</a>
-                    </li>
+                    <a href="#adminMenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Administration</a>
+                    <ul class="collapse list-unstyled" id="adminMenu">
+                        <li>
+                            <a href="{{ path('article_index') }}">Gérer les articles</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorie_index') }}">Gérer les catégories</a>
+                        </li>
+                    </ul>
+                    
                 </ul>
-
-            </ul>
+            
+            {% endif %}
+        {% endif %}    
+        
         
          
         <ul class="list-unstyled components">

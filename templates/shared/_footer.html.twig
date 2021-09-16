@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>À propos</h2>
-                <p>Qui somme nous</p>
-                <p>Confidentialités et Cookies</p>
+                <a href="{{ path('apropos') }}"><p>Qui somme nous</p></a>
+                <a href="{{ path('confidentialite') }}"><p>Confidentialités et Cookies</p></a>
                 <p>Mentions légales</p>
             </div>
 
@@ -18,7 +18,7 @@
                 <h2>Contactez nous</h2>
                 <p><i class="fas fa-at mr-2"></i>hardwareactu@gmail.com</p>
                 <p><i class="fas fa-phone mr-2"></i>06.62.25.12.14</p>
-                <p><a href="contact.html">Formulaire de contact</a></p>
+                <p><a href="{{ path('contact') }}">Formulaire de contact</a></p>
 
             </div>
         </div>

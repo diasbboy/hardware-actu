@@ -1,77 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Page de connexion{% endblock %}
 
 {% block body %}
 
-   
-            {# <h1 class="text-center">Identifiez-vous</h1>
-      
-            <div class="col-md-5 widthPictureLog"><img src="assets/logos/blanc_logo_small_icon_only_W&B.png" class="img-fluid" alt=""></div> #}
+    <form class="col-md-8 py-5 my-5 mx-auto formLogin" method="post">
 
+        <div class="container col-md-5">
 
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData,'security') }}</div>
+            {% endif %}
 
-                <form class="py-5 my-5 formLogin" method="post">
+            {% if app.user %}
 
-                    <div class="container col-md-4 ">
-                        {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        {% endif %}
+                    Vous êtes déja connecté avec l'email : {{ app.user.username }}, voulez vous vous déconnecter ? <a href="{{ path('app_logout') }}">Se déconnecter</a>
 
-                        {% if app.user %}
+            {% endif %}
+            
+            <div class="py-5">
+                <img src="{{ asset('asset/logos/blanc_logo_small.png') }}"  class="w-100" alt="">
+            </div>
+        
+            <div class="form-group pt-3">
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Votre email...">
+            </div>
 
-                                Vous êtes déja connecté avec l'email : {{ app.user.username }}, voulez vous vous déconnecter ? <a href="{{ path('app_logout') }}">Logout</a>
- 
-                        {% endif %}
-                        
-                        <div class="py-5 ">
-                            <img src="{{ asset('asset/logos/blanc_logo_small.png') }}" alt="">
-                        </div>
-                    
-                        <div class="form-group pt-3">
-                            <label for="inputEmail">Email</label>
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Votre email...">
-                        </div>
+            <div class="form-group">
+                <label for="inputPassword" class="pt-3">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Votre mot de passe...">
+            </div>
 
-                        <div class="form-group">
-                            <label for="inputPassword" class="pt-3">Mot de passe</label>
-                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Votre mot de passe...">
-                        </div>
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
 
-                        <input type="hidden" name="_csrf_token"
-                            value="{{ csrf_token('authenticate') }}"
-                        >
+            <div class="form-group">
+                <button class="btn btn-lg btn-success mt-4" type="submit">Se connecter</button>
+            </div>   
 
-                        <div class="form-group">
+        </div>
 
-                            <button class="btn btn-lg btn-success mt-4" type="submit">Se connecter</button>
-                        </div>   
- 
-                    </div>
-
-                </form>
-
-
-
-            {# <form method="post" class="pt-5">
-                <div class="container col-md-3 pt-5">
-
-                    <h2 class="sr-only col-md-4">Login Form</h2>
-
-                    <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
-
-                    <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email">
-                    </div>
-
-                    <div class="form-group"><input class="form-control" type="password" name="password"
-                            placeholder="Password"></div>
-
-                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button>
-
-                    </div><a href="#" class="forgot">Forgot your email or password?</a>
-                </div>
-            </form> #}
-
+    </form>
 
 
 {% endblock %}
