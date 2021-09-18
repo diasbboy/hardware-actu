@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Video{% endblock %}
+
+{% block body %}
+    <h1>{{ video.titre }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ video.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ video.titre }}</td>
+            </tr>
+            <tr>
+                <th>LienVideo</th>
+                <td><iframe class="w-50" src="{{ video.lienVideo }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ video.description }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ video.source }}</td>
+            </tr>
+            <tr>
+                <th>LienSource</th>
+                <td>{{ video.lienSource }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('video_edit', {'id': video.id}) }}" class="btn btn-primary">modifier</a>
+
+    {{ include('video/_delete_form.html.twig') }}
+
+    <a href="{{ path('video_index') }}" class="btn btn-primary">Retour à la liste des vidéos</a>
+{% endblock %}

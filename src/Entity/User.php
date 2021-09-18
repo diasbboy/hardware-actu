@@ -54,9 +54,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $commentaires;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="user")
      */
-    private $articles;
+    private $videos;
+
+ 
 
     public function __toString()
     {
@@ -67,6 +69,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->commentaires = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -224,6 +228,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($article->getUser() === $this) {
                 $article->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getUser() === $this) {
+                $video->setUser(null);
             }
         }
 

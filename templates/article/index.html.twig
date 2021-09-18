@@ -4,50 +4,44 @@
 
 {% block body %}
 
-    <div class="py-5">
-        <div class="container">
+<div class="container-fluid">
+    <a href="{{ path('article_new') }}" class="btn btn-primary my-2">Ajouter un nouvel article</a>
+    <div class="row">
+
+        {% for article in articles %}
+            
+            <div class="col-md-4 pb-4">
+                <div class="card">
+                    <img src="{{ asset(article.image) }}" class="w-100" alt="">
+                    <div class="card-body">
+                        <span>id: {{ article.id }}</span> <br>
+                        <span>Catégorie : {{ article.categorie.nom }}</span> <br>
+                        {{ article.titre }} <br><br>
+                        {{ article.contenu }}
+                        <br>
+                        <br> <span>Source: <a href=" {{ article.lien }} ">{{ article.source }}</a></span><br>
+                        
+                        
+                        
+                        <span>Ajouté le: {{ article.createdAt ? article.createdAt|date('d-m-Y H:i:s') : '' }}</span>  <br>
+                        
+                        <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-success mt-3">Afficher</a>
+                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-warning mt-3">Modifier</a>                   
+                    </div>       
+                
+            
+                </div>
+            </div>
+
+            {% else %}   
+
+                    <p colspan="8">Aucun enregistrement trouvé</p>
+            
+        {% endfor %}
+    </div>      
+</div>
         
-        <h1>Liste des articles</h1>
+    
+    
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Titre</th>
-                    <th>Contenu</th>
-                    <th>Source</th>
-                    <th>Lien</th>
-                    <th>Image</th>
-                    <th>CreatedAt</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for article in articles %}
-                <tr>
-                    <td>{{ article.id }}</td>
-                    <td>{{ article.titre }}</td>
-                    <td>{{ article.contenu }}</td>
-                    <td>{{ article.source }}</td>
-                    <td>{{ article.lien }}</td>
-                    <td>
-                        <img src="{{ asset(article.image) }}" alt="">
-                    </td>
-                    <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>
-                        <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-success">Afficher</a>
-                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-warning">Modifier</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="8">Aucun enregistrement trouvé</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <a href="{{ path('article_new') }}" class="btn btn-primary">Ajouter un nouvel article</a>
-        </div>
-    </div>
 {% endblock %}

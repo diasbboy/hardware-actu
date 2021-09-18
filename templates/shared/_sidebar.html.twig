@@ -45,17 +45,14 @@
         </li>
     </ul>
 
-    
+    {# partie de la side bar réservé a l'admin #}
+    {% if app.user %}
+        {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+        
+            <ul class="list-unstyled components">
 
-    
-        {% if app.user %}
-            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-            
-                <ul class="list-unstyled components">
-
-                    <li>
-                    <a href="#adminMenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Administration</a>
+                <li>
+                    <a href="#adminMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administration</a>
                     <ul class="collapse list-unstyled" id="adminMenu">
                         <li>
                             <a href="{{ path('article_index') }}">Gérer les articles</a>
@@ -63,28 +60,29 @@
                         <li>
                             <a href="{{ path('categorie_index') }}">Gérer les catégories</a>
                         </li>
+                        <li>
+                            <a href="{{ path('video_index') }}">Gérer les vidéos</a>
+                        </li>
                     </ul>
-                    
-                </ul>
-            
-            {% endif %}
-        {% endif %}    
-        
-        
-         
-        <ul class="list-unstyled components">
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle">Compte</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
 
-        {% if app.user %} 
-                    <li>
-                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    </li>
+                </li>
+                
+            </ul>
+        
+        {% endif %}
+    {% endif %}    
+                 
+    <ul class="list-unstyled components">
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                class="dropdown-toggle">Compte</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+
+    {% if app.user %} 
+                <li>
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </li>
         {% else %}
-            
-   
 
                 <li>
                     <a href="{{ path('app_login') }}">Se connecter</a>

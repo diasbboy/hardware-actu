@@ -35,6 +35,8 @@ class HandleImage
     public function editImage($imageFile, object $object, $vintageImage)
     {
         $this->saveImage($imageFile, $object);
+        
+        $this->deleteImage($vintageImage);
     }
 
     public function deleteImage($vintageImage)

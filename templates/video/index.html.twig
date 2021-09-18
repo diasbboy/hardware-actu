@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Video index{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <a href="{{ path('video_new') }}" class="btn btn-primary mb-2">Ajouter une nouvelle Vidéo</a>
+    <div class="row">
+
+    {% for video in videos %}
+            <div class="col-md-3 pb-4"> 
+                <div class="card">
+                    <iframe class="w-100 h-100" src="{{ video.lienVideo }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    <div class="card-body">
+                        <span>id: {{ video.id }}</span><br>
+                        <h3>{{ video.titre }}</h3>
+                        <p>{{ video.description }}</p>
+                        <span>Source: <a href="{{ video.lienSource }}">{{ video.source }}</a></span>
+                        
+                        <span>Ajouté le: {{ video.createdAt ? video.createdAt | date('d-m-Y') : '' }}</span> <br>
+
+                        <a href="{{ path('video_show', {'id': video.id}) }}" class="btn btn-success mt-3">Afficher</a>
+                        <a href="{{ path('video_edit', {'id': video.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p colspan="7">Aucun enregistrement trouvé</p>
+    {% endfor %}
+    </div>
+  
+</div>
+
+
+
+
+
+    {# <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>LienVideo</th>
+                <th>Description</th>
+                <th>Source</th>
+                <th>LienSource</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>{{ video.id }}</td>
+                <td>{{ video.titre }}</td>
+                <td><iframe width="560" height="315" src="{{ video.lienVideo }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+                <td>{{ video.description }}</td>
+                <td>{{ video.source }}</td>
+                <td>{{ video.lienSource }}</td>
+                <td>
+                    <a href="{{ path('video_show', {'id': video.id}) }}">show</a>
+                    <a href="{{ path('video_edit', {'id': video.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> #}
+
+
+{% endblock %}
