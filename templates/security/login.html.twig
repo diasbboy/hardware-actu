@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <form class="col-md-8 py-5 my-5 mx-auto formLogin" method="post">
+    <form class="col-12 col-md-8 py-5 my-5 mx-auto formLogin" method="post">
 
-        <div class="container col-md-5">
+        <div class="container col-md-7">
 
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData,'security') }}</div>

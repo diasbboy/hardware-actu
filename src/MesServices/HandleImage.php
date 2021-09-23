@@ -28,7 +28,7 @@ class HandleImage
             $uniqFileName
         );
 
-        $object->setImage('/uploads/'.$uniqFileName);
+        $object->setImage('/uploads/'. $uniqFileName);
 
     }
 
@@ -43,7 +43,7 @@ class HandleImage
     {
         if($vintageImage)
         {
-            $pathToVintageImage = $this->containerBag->get('app_images_directory')."/..". $vintageImage;
+            $pathToVintageImage = $this->containerBag->get('app_images_directory') . "/.." . $vintageImage;
 
             if(file_exists($pathToVintageImage))
             {

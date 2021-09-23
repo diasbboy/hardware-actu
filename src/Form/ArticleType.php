@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -43,7 +45,15 @@ class ArticleType extends AbstractType
                 'label' => 'Ajouter une image',
                 'mapped' => false
             ])
-            ->add('categorie')
+            ->add('categorie',EntityType::class,[
+                'required' => false,
+                'label' => 'Catégorie',
+                'placeholder' => '-- Choisir une catégorie --',
+                'class' => Categorie::class,
+                'choice_label' => function(Categorie $categorie){
+                    return strtoupper($categorie->getNom());
+                }
+            ])
         ;
     }
 

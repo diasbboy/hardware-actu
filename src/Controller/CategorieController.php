@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Form\CategorieType;
+use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategorieController extends AbstractController
 {
     #[Route('/', name: 'categorie_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN',message:'Accès réservé')]
     public function index(CategorieRepository $categorieRepository): Response
     {
         return $this->render('categorie/index.html.twig', [
@@ -45,10 +47,14 @@ class CategorieController extends AbstractController
     }
 
     #[Route('/{id}', name: 'categorie_show', methods: ['GET'])]
-    public function show(Categorie $categorie): Response
+    public function show(Categorie $categorie, ArticleRepository $articleRepository): Response
     {
+        $articles = $articleRepository->findBy([
+            'categorie' => $categorie
+        ]);
         return $this->render('categorie/show.html.twig', [
             'categorie' => $categorie,
+            'articles' => $articles
         ]);
     }
 

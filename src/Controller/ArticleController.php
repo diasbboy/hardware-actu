@@ -3,9 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Commentaire;
 use App\Form\ArticleType;
+use App\Form\CommentaireType;
+use App\Form\SearchArticleType;
 use App\MesServices\HandleImage;
 use App\Repository\ArticleRepository;
+use App\Search\SearchArticle;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,10 +22,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'article_index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository): Response
+    #[IsGranted('ROLE_ADMIN',message:'Accès réservé')]
+    public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new SearchArticle();
+
+        $form = $this->createForm(SearchArticleType::class,$search);
+        $form->handleRequest($request);
+
+
+        $articles = $paginator->paginate(
+            $articleRepository->findAllArticleByFilter($search),
+            $request->query->getInt('page',1),
+            5
+        );
+
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
+            'form' => $form->createView()
         ]);
     }
 
@@ -57,11 +78,28 @@ class ArticleController extends AbstractController
         ]);
     }
     
-    #[Route('/{id}', name: 'article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    #[Route('/{id}', name: 'article_show', methods: ['GET','POST'])]
+    public function show(Article $article, Request $request, EntityManagerInterface $em,int $id): Response
     {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $commentaire->setArticle($article);
+            $commentaire->setUser($this->getUser());
+
+            $em->persist($commentaire);
+            $em->flush();
+
+            return $this->redirectToRoute('article_show',['id' => $id]);
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'form' => $form->createView()
         ]);
     }
 
@@ -97,9 +135,13 @@ class ArticleController extends AbstractController
 
     #[Route('/{id}', name: 'article_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN',message:'Accès réservé')]
-    public function delete(Request $request, Article $article): Response
+    public function delete(Request $request, Article $article, HandleImage $handleImage): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+
+            $vintageImage = $article->getImage();
+            $handleImage->deleteImage($vintageImage);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();

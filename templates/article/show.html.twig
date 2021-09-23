@@ -3,47 +3,98 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-<div class="container py-5">
-    <h1>Article</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Source</th>
-                <td>{{ article.source }}</td>
-            </tr>
-            <tr>
-                <th>Lien</th>
-                <td>{{ article.lien }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>
-                    <img src="{{ asset(article.image) }}" alt="">
-                </td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="container col-md-11">
+                <div class="col-md-7 mx-auto mb-3">
+                    <img src="{{ asset(article.image) }}" class="d-block w-75" alt="">
+                </div>
 
-    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary mb-2">Modifier</a>
+                <div class="col-md-7 mx-auto text-justify">
+                    <h2 class="my-4">{{ article.titre }}</h2>
+                    <p>{{ article.contenu }}</p>
+                    <a href="{{ article.lien }}" target="blank"><span>Source : {{ article.source }}</span></a> <br>
+                    <span>Posté le : {{ article.createdAt|date('d-m-Y') }}</span> <br>
 
-    {{ include('article/_delete_form.html.twig') }}
-    <a href="{{ path('article_index') }}" class="btn btn-primary mt-2">Revenir à la liste des articles</a>
-</div>
+
+                    {# mettre l'espace commentaire ici #}
+                    <div>
+                        <div>
+                            <div>
+                                <h5>Ajouter un commentaire</h5>
+                            </div>
+                            <div>
+                                {% if app.user %}
+                                    {# formulaire #}
+                                    {{ form_start(form) }}
+
+                                    {{ form_widget(form) }}
+                                    <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
+
+                                    {{ form_end(form) }}
+
+                                    {% else %}
+                                        <p>Vous devez être connecté pour ajouter un commentaire</p>
+                                        <a href="{{ path('app_login') }}" class="btn btn-link">Se connecter</a>
+                                        <a href="{{ path('app_register') }}" class="btn btn-link">Créer un compte</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h5>Commentaires</h5>
+                        </div>
+                        <div>
+                            {% if article.commentaires | length > 0 %}
+                                {% for commentaire in article.commentaires %}
+
+                                    <span 
+                                        {% if app.user is same as commentaire.user %}
+                                            
+                                            class="comNom"
+                                            {# mettre du style la dedans #}
+
+                                        {% endif %}
+                                    >{{ commentaire.user.pseudo}}</span> <br>
+                                    <span>{{ commentaire.createdAt | date('d-m-Y H:i') }}</span>
+                                    <p>{{  commentaire.contenue }}</p>
+                                    {% if app.user %}
+                                        <a href="#">Supprimer</a>
+                                    {% endif %}
+                                    <hr>
+                                {% endfor %}
+                                {% else %}
+                                    <p>il n'y a pas encore de commentaires.</p>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+
+                    {% if app.user %}
+                        {% if app.user.roles[0] is same as 'ROLE_ADMIN' %}
+                        
+                            <span>id : {{ article.id }}</span>  <br>
+                            <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary mb-2 mt-4">Modifier</a>
+
+                            {{ include('article/_delete_form.html.twig') }}
+                            <a href="{{ path('article_index') }}" class="btn btn-primary mt-2">Revenir à la liste des articles</a>
+                        
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            
+            </div>
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

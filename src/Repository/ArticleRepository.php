@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,25 @@ class ArticleRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+    public function findAllQuery(): QueryBuilder
+    {
+        //le a c'est pour article
+        return $this->createQueryBuilder('a');
+    }
+
+    public function findAllArticleByFilter($search)
+    {
+        $query = $this->findAllQuery();
+
+        if($search->getFiltrerParCategorie())
+        {
+            $query = $query->andWhere('a.categorie = :categorie');
+            $query->setParameter('categorie', $search->getFiltrerParCategorie());
+        }
+
+        return $query->getQuery();
     }
 
     // /**

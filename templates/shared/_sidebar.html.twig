@@ -11,34 +11,13 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
                 class="dropdown-toggle">Actualités</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Processeurs</a>
-                </li>
-                <li>
-                    <a href="#">Cartes mères</a>
-                </li>
-                <li>
-                    <a href="#">Cartes Graphiques</a>
-                </li>
-                <li>
-                    <a href="#">Disques dur</a>
-                </li>
-                <li>
-                    <a href="#">Ram</a>
-                </li>
-                <li>
-                    <a href="#">Alimentation</a>
-                </li>
-                <li>
-                    <a href="#">Boitier</a>
-                </li>
-                <li>
-                    <a href="#">Refroidissement</a>
-                </li>
+                {% for categorie in categorieRepository.findAll() %}
+                    <a href="{{ path('categorie_show',{ 'id' : categorie.id }) }}">{{ categorie.nom }}</a>
+                {% endfor %}
             </ul>
         </li>
         <li>
-            <a href="#">tutoriels</a>
+            <a href="{{ path('video_index') }}">tutoriels</a>
         </li>
         <li>
             <a href="#">Forum</a>
@@ -64,7 +43,6 @@
                             <a href="{{ path('video_index') }}">Gérer les vidéos</a>
                         </li>
                     </ul>
-
                 </li>
                 
             </ul>
@@ -81,6 +59,9 @@
     {% if app.user %} 
                 <li>
                     <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </li>
+                <li>
+                    <a href="{{ path('user_profile',{'id': app.user.id }) }}">Gérer mon compte</a>
                 </li>
         {% else %}
 

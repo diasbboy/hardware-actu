@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentaireRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentaireRepository;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=CommentaireRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Commentaire
 {
@@ -29,6 +32,7 @@ class Commentaire
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $article;
 
@@ -37,6 +41,17 @@ class Commentaire
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if(empty($this->createdAt))
+        {
+            $this->createdAt = new DateTime();
+        }
+    }
 
     public function getId(): ?int
     {
