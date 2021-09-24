@@ -1,0 +1,64 @@
+
+.italic{
+    font-style: italic
+}
+
+.iconPadding{
+    padding-left: 12rem;
+}
+
+
+/* taille des icones  */
+.iconF{
+    width: 30px;
+}
+.iconI{
+    width: 41px;
+}
+.iconT{
+    width: 34px;
+}
+
+/* taille Font card */
+.fontCardTitle{
+    font-size: 18px;
+    font-weight:600;
+    line-height: 20px;
+}
+
+.fontCard{
+    font-weight:800;
+    line-height: 20px;
+}
+
+.fontCardMiddle{
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.cardWidth{
+    max-width: 520px;
+}
+
+/* .c-hover:hover {
+    color: white;
+    background: red;
+    box-shadow: 0 2rem 2rem rgba(180, 180, 180, 1);
+    background-color: #3168c6;
+    transition: 1.5s
+} */
+.zoom {
+	transition-property: transform;
+	-webkit-transition-property: transform;
+    transition-duration: .2s;
+	transition-timing-function:initial;
+	}
+
+.zoom:hover {
+	transform: scale(1.2);
+   	-webkit-transform: scale(.9);
+    background: red;
+    box-shadow: 0 2rem 2rem rgba(180, 180, 180, 1);
+    background-color: #c0c0c0;
+    transition: .5s
+}

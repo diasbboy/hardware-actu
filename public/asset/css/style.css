@@ -3,16 +3,16 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #cccccc;
+    background: #eeeeee; 
 }
 
-p {
+/* p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    /* color: #999; */
-}
+   
+} */
 
 a,
 a:hover,
@@ -28,7 +28,7 @@ a:focus {
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-btn {
@@ -57,7 +57,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #4c4c4d;
+    background: #3168c6;
     color: #fff;
     transition: all 0.3s;
 }
@@ -113,7 +113,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #81a3dc;
+    background: #3168c6;
 }
 
 ul.CTAs {
@@ -157,7 +157,6 @@ img{
 
 .imageSide{
     width: 20vh;
-
 }
 
 

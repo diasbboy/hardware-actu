@@ -4,7 +4,7 @@
     </div>
 
     <ul class="list-unstyled components mt-5">
-        <li class="active">
+        <li>
             <a href="{{ path('home') }}">Accueil</a>
         </li>
         <li>
@@ -19,12 +19,9 @@
         <li>
             <a href="{{ path('video_index') }}">tutoriels</a>
         </li>
-        <li>
-            <a href="#">Forum</a>
-        </li>
     </ul>
 
-    {# partie de la side bar réservé a l'admin #}
+    {# partie réservé a l'admin #}
     {% if app.user %}
         {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
         
@@ -52,16 +49,16 @@
                  
     <ul class="list-unstyled components">
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+            <a href="#compte" data-toggle="collapse" aria-expanded="false"
                 class="dropdown-toggle">Compte</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
+            <ul class="collapse list-unstyled" id="compte">
 
     {% if app.user %} 
                 <li>
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    <a href="{{ path('user_profile',{'id': app.user.id }) }}">Gérer mon compte</a>
                 </li>
                 <li>
-                    <a href="{{ path('user_profile',{'id': app.user.id }) }}">Gérer mon compte</a>
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
                 </li>
         {% else %}
 
