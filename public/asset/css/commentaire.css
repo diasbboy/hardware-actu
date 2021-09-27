@@ -1,8 +1,13 @@
 .comNom{
-    color: green;
+    color: #3168c6;
+    font-weight:600;
 }
 
 .bg{
     background: rgb(255, 255, 255);
     border-radius: 15px ;
+}
+
+.btn-commentaire{
+    border-radius: 20px;
 }

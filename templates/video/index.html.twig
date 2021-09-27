@@ -14,23 +14,24 @@
     {% if videos | length > 0 %}
 
         {{ knp_pagination_render(videos) }}
-    <div class="row">
+    <div class="row my-4">
 
     {% for video in videos %}
             <div class="col-md-3 pb-4"> 
-                <div class="card">
+                <div class="card zoomVideo">
                     <iframe class="w-100 h-100" src="{{ video.lienVideo }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                     <div class="card-body">
-                        <span>id: {{ video.id }}</span><br>
+                        
                         <h3>{{ video.titre }}</h3>
                         <p>{{ video.description }}</p>
-                        <span>Source: <a href="{{ video.lienSource }}">{{ video.source }}</a></span>
+                        <span>Source: <a class="fontColor" href="{{ video.lienSource }}">{{ video.source }}</a></span>
                         
                         <span>Ajouté le: {{ video.createdAt ? video.createdAt | date('d-m-Y') : '' }}</span> <br> 
 
                         {% if app.user %}
-                            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}    
+                            {% if app.user.roles[0] is same as "ROLE_ADMIN" %} 
+                            <span>id: {{ video.id }}</span><br>   
                                 <a href="{{ path('video_edit', {'id': video.id}) }}" class="btn btn-warning mt-3">Modifier</a>
                                 <a href="{{ path('video_show', {'id': video.id}) }}" class="btn btn-success mt-3">Afficher</a>
                             {% endif %}

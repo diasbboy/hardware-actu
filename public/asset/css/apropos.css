@@ -1,0 +1,14 @@
+.arrondiCoteDroit{
+    border-top-right-radius: 50px;
+}
+.arrondiCoteGauche{
+    border-bottom-left-radius: 50px;
+}
+
+.bgCustom{
+    background: linear-gradient(to bottom right, #3168c6, white);
+}
+
+.bgCustom1{
+    background: linear-gradient(to bottom right,white, #3168c6);
+}

@@ -150,9 +150,12 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
     }
 
+
     #[Route('/delete/commentaire/{id}', name: 'commentaire_delete', methods: ['POST'])]
     public function deleteCommentaire(int $id,Request $request,Commentaire $commentaire): Response
-    {
+    {   
+        $article = $commentaire->getArticle();
+
         if ($this->isCsrfTokenValid('delete'.$commentaire->getId(), $request->request->get('_token'))) {
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -160,6 +163,6 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('article_show',['id' => $id], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('article_show',['id' => $article->getId()], Response::HTTP_SEE_OTHER);
     }
 }
