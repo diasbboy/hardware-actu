@@ -12,6 +12,25 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
+     * @Route("profile/show/{id}", name="show_profile")
+     */
+    public function ShowProfile(int $id,UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+
+        // Si l'utilisateur n'est pas connecté , le renvoyer vers la page d'accueil
+        if($user !== $this->getUser())
+        {
+            //Ajouter message flash
+            return $this->redirectToRoute('home');
+        }
+        return $this->render("profile/show.html.twig",[
+            'user' => $user,
+        ]);
+    }
+
+
+    /**
      * @Route("profile/{id}", name="user_profile")
      */
     public function profile(int $id,UserRepository $userRepository,Request $request,UserPasswordEncoderInterface $passwordEncoder)
@@ -44,7 +63,7 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render("profile/detail.html.twig",[
+        return $this->render("profile/editPassword.html.twig",[
             'formPassword' =>  $form->createView()
         ]);
     }

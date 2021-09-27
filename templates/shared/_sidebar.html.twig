@@ -54,8 +54,11 @@
             <ul class="collapse list-unstyled" id="compte">
 
     {% if app.user %} 
-                <li>
+                {# <li>
                     <a href="{{ path('user_profile',{'id': app.user.id }) }}">Gérer mon compte</a>
+                </li> #}
+                <li>
+                    <a href="{{ path('show_profile',{'id': app.user.id }) }}">mon compte</a>
                 </li>
                 <li>
                     <a href="{{ path('app_logout') }}">Se déconnecter</a>

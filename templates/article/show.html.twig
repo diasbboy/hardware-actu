@@ -54,10 +54,18 @@
 
                                     {% endif %}
                                 >{{ commentaire.user.pseudo}}</span> <br>
+
                                 <span>{{ commentaire.createdAt | date('d-m-Y H:i') }}</span>
+
                                 <p>{{  commentaire.contenue }}</p>
-                                {% if app.user %}
-                                    <a href="#" class="btn-link">Supprimer</a>
+
+                                {% if app.user is same as commentaire.user %}
+
+                                    <form method="post" action="{{ path('commentaire_delete', {'id': commentaire.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commentaire.id) }}">
+                                    <button class="btn btn-danger mt-2">Supprimer</button>
+                                    </form>
+
                                 {% endif %}
                                 <hr>
                             {% endfor %}
