@@ -12,3 +12,7 @@
 .bgCustom1{
     background: linear-gradient(to bottom right,white, #3168c6);
 }
+
+.fontSize{
+    font-size: 18px;
+}
