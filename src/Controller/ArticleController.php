@@ -133,7 +133,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'article_delete', methods: ['POST'])]
+    #[Route('/delete/article/{id}', name: 'article_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN',message:'Accès réservé')]
     public function delete(Request $request, Article $article, HandleImage $handleImage): Response
     {
@@ -149,6 +149,7 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
     }
+
 
 
     #[Route('/delete/commentaire/{id}', name: 'commentaire_delete', methods: ['POST'])]

@@ -19,7 +19,7 @@
             <link rel="stylesheet" href="{{ asset('asset/css/home.css') }}">
             <link rel="stylesheet" href="{{ asset('asset/css/apropos.css') }}">    
         {% endblock %}
-
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('asset/logos/logo_small_icon_only_inverted.png') }}" />
         <!-- Font Awesome JS -->
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -41,7 +41,10 @@
 
                 {% include "shared/_navbar.html.twig" %}
 
-                {% block body %}{% endblock %}
+                {% block body %}
+
+                
+                {% endblock %}
 
                 {% include "shared/_footer.html.twig" %}
                 

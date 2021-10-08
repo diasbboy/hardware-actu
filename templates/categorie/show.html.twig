@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie{% endblock %}
+{% block title %}{{ categorie.nom }}{% endblock %}
 
 {% block body %}
 
@@ -17,7 +17,9 @@
                         </div>
                         <div class="card-body">
                             <h5>{{ article.titre }}</h5>
-                            
+                        </div>
+                        <div class="card-footer">
+                            <p>{{ article.contenu | personal_trunc }}</p>
                         </div>
                     
                     </div>

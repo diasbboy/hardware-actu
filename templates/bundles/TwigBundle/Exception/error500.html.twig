@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accès interdit{% endblock %}
+
+{% block body %}
+
+      <!-- Text -->
+        <p class="mb-5 text-center text-muted">
+            Erreur 500 - Erreur Serveur
+        </p>
+        <p class="mb-5 text-center text-muted">
+            {{ status_code }}
+        </p>
+        <p class="mb-5 text-center text-muted">
+            {{ status_text }}
+        </p>
+        <p class="mb-5 text-center text-muted">
+            {{ exception.message }}
+        </p>
+
+
+{% endblock %}

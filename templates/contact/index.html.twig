@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Contactez-nous{% endblock %}
 
 {% block body %}
 
     <section class="formContact container my-5 pt-3">
+    
+        {% include "shared/_messages_flash.html.twig" %}
+        
         <h1 class="text-center">Formulaire de contact</h1>
         <div class="col-12 col-md-12 my-5 row">
             <div class="col-md-5 widthPicture"><img src="{{ asset('asset/logos/blanc_logo_small_icon_only_W&B.png') }}" class="img-fluid" alt="logo"></div>
@@ -20,9 +23,5 @@
 
         </div>
     </section>
-
-    
-
-            
 
 {% endblock %}

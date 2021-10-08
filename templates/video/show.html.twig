@@ -1,9 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Video{% endblock %}
+{% block title %}{{ video.titre }}{% endblock %}
 
 {% block body %}
-    <h1>{{ video.titre }}</h1>
+
+<div class="container-fluid">
+    <div class="col-12 col-md-7 mx-auto">
+        <div class="card">
+        <h3>{{ video.titre }}</h3>
+    
+    
+        <div class="col-md-12"><b>Id de la vidéo :</b> {{ video.id }}</div>
+        <div class="col-md-12"><b>Titre :</b> {{ video.titre }}</div>
+        
+        <div class="col-md-12"><iframe class="w-100" src="{{ video.lienVideo }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="col-md-12"><b>Déscritpion :</b> {{ video.description }}</div>
+
+        <div class="col-md-12"><b>Source :</b> {{ video.source }}</div>
+        <div class="col-md-12"><b>Lien de la chaine youtube :</b> {{ video.lienSource }}</div>
+    
+
+        <a href="{{ path('video_edit', {'id': video.id}) }}" class="btn btn-primary mt-4 ml-3" style="width : 110px;">Modifier</a>
+
+        {{ include('video/_delete_form.html.twig') }}
+
+        <a href="{{ path('video_index') }}" class="btn btn-primary mb-5 ml-3" style="width : 210px;">Retour à la liste des vidéos</a>
+    
+        </div>    
+    </div>
+</div>
+
+    {# <h1>{{ video.titre }}</h1>
 
     <table class="table">
         <tbody>
@@ -32,11 +59,7 @@
                 <td>{{ video.lienSource }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
 
-    <a href="{{ path('video_edit', {'id': video.id}) }}" class="btn btn-primary">modifier</a>
 
-    {{ include('video/_delete_form.html.twig') }}
-
-    <a href="{{ path('video_index') }}" class="btn btn-primary">Retour à la liste des vidéos</a>
 {% endblock %}

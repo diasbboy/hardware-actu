@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer votre compte{% endblock %}
 
 {% block body %}
     <section class=" container my-5 pt-3 formLogin">
         <h1 class="text-center">Créer un compte</h1>
         <div class="container col-md-12 my-5 row">
-            <div class="col-md-5 widthPicture"><img src="{{ asset('asset/logos/blanc_logo_small_icon_only_W&B.png') }}" class="img-fluid" alt=""></div>
+            <div class="col-md-5 widthPicture"><img src="{{ asset('asset/logos/blanc_logo_small_icon_only_W&B.png') }}" class="img-fluid" alt="logo_du_site"></div>
                 <div class="col-md-7" method="POST">
 
                 {{ form_start(registrationForm) }}
@@ -16,8 +16,8 @@
                     {{ form_row(registrationForm.plainPassword.second) }}
                     {{ form_row(registrationForm.agreeTerms) }} 
 
-                {{ form_end(registrationForm) }}
                     <button type="submit" class="btn btn-success mt-3">Créer un compte</button>
+                {{ form_end(registrationForm) }}
 
             </div>
 

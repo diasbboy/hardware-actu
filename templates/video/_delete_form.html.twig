@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('video_delete', {'id': video.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ video.id) }}">
-    <button class="btn btn-danger my-2">Supprimer</button>
+    <button class="btn btn-danger my-2 ml-3">Supprimer</button>
 </form>
