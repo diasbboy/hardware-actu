@@ -24,7 +24,13 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Pseudo',
                 'attr' => [
                     'placeholder' => 'Votre pseudo...'
-                ] 
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => 'Votre pseudo doit contenir au moin {{ limit }} caractères.',
+                    ]),
+                ],
             ])
             ->add('email',EmailType::class,[
                 'label' => 'Email',
@@ -51,6 +57,10 @@ class RegistrationFormType extends AbstractType
                     'label' => 'Mot de passe',
                     'attr' => ['placeholder' => 'Entrez un mot de passe...'],
                     'constraints' => [
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Votre mot de passe doit contenir au moin {{ limit }} caractères.',
+                        ]),
                         new NotBlank([
                             'message' => 'Vous devez entrer un mot de passe'
                         ]),
